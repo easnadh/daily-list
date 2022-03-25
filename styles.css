@@ -1,0 +1,86 @@
+body {
+	/* font-family: Sen, sans-serif; */
+}
+
+.to-do-list {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: bisque;
+}
+
+.head {
+	padding: 20px;
+	background-color:#006363;
+	color: aliceblue;
+	text-align: center;
+}
+
+ol {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+	padding: 10px;
+	background-color:aliceblue;
+	color: #1D7373;
+}
+
+li:hover {
+	background-color: #009999;
+	color: aliceblue;
+}
+
+.list-element del {
+	text-decoration: none;
+}
+
+.list-element[type="checkbox"]:checked ~ del {
+	text-decoration: line-through;
+	text-decoration-color: #006363;
+} 
+
+#label {
+	border: 0;
+	height: 25px;
+	color: #006363;
+}
+
+#button {
+	border: 0;
+	height: 27px;
+	background-color: aliceblue;
+	color: #006363;
+}
+
+#list li {
+	display: flex;
+	flex-direction: row; 
+}
+
+#list li span {
+	flex: 1;
+}
+
+
+#list {
+/*background: #fff;*/
+border: 1px solid #C1C1C1;
+overflow-y: scroll;
+}
+
+
+/* 
+button:hover {
+	color: blue;
+	border: 3px dotted red;
+	margin: 10px;
+	padding: 10px;
+	background-color: palegoldenrod;
+	border-radius: 20px;	
+	background-color:rgba(255, 0, 0, 0.2);
+} 
+*/
