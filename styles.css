@@ -22,26 +22,31 @@ ol {
 	padding: 0;
 }
 
-li {
+ol li {
 	list-style-type: none;
 	padding: 10px;
 	background-color:aliceblue;
 	color: #1D7373;
 }
 
-li:hover {
+ol li:hover {
 	background-color: #009999;
 	color: aliceblue;
 }
 
-.list-element del {
+/* .list-element del {
 	text-decoration: none;
+} */
+ol li.checked {
+	background-color: aliceblue;
+	color: #006363;
+	text-decoration: line-through;
 }
 
-.list-element[type="checkbox"]:checked ~ del {
+/* .list-element[type="checkbox"]:checked ~ del {
 	text-decoration: line-through;
 	text-decoration-color: #006363;
-} 
+}  */
 
 #label {
 	border: 0;
