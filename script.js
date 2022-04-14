@@ -20,20 +20,40 @@ function addElem(event) {
 	label.value = "";
 }
 
-function delElem(ev) {
+function delElem(id) {
 	// const innerEvent = ev || event;
 	// innerEvent.target.parentElement.remove();
+	arr = arr.filter(item => item.id !== id);
+	//localStorage.removeItem(id);
+
+	console.log(arr);
+	console.log("ouuu");
 	render();
+}
+
+function doneElem(id) {
+	for (let item of arr) {
+		if (arr.id === id && arr.isDone === false) {
+			arr.isDone = true;
+			console.log("было false, стало true");
+		}
+		else if (arr.id === id && arr.isDone === true) {
+			arr.isDone = false;
+			console.log("было true, стало false");
+		}
+	}
+	return arr.isDone;
 }
 
 function render() {
 	const ol = document.getElementById("list");
 	ol.innerHTML = "";
-	for(let item of arr) {
-
+	for (let item of arr) {
 		let li = document.createElement("li");
-		li.innerHTML = `<input type="checkbox" onclick="checkboxCheck"><span>${item.text}</span>
-		<button onclick="delElem()">x</button>`;
+		li.innerHTML = `<input type="checkbox">
+		<button onclick="doneElem('${item.id}')">V</button>
+		<span>${item.text}</span>
+		<button onclick="delElem('${item.id}')">x</button>`;
 		// li.setAttribute("id", "element" + item.id);
 		ol.appendChild(li);
 	}
@@ -55,12 +75,10 @@ function render() {
 
 document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("form").addEventListener("submit", addElem);
-
-	if (localStorage.getItem("to-do-list") != undefined) {
+	
+	if (localStorage.getItem("to-do-list") !== undefined) {
 		arr = JSON.parse(localStorage.getItem("to-do-list"));
 	}
-
+	console.log(arr);
 	render();
-	
 });
-
