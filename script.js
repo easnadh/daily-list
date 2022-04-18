@@ -1,6 +1,6 @@
 
 let arr = [{
-	id: 0,
+	id: "0",
 	text: "покормить кота",
 	isDone: false
 }];
@@ -8,7 +8,7 @@ let arr = [{
 function addElem(event) {
 	event.preventDefault();
 	const label = document.getElementById("label");
-	const id = arr.length;
+	const id = String(arr.length);
 	arr.push({
 		id,
 		text: label.value,
@@ -16,67 +16,55 @@ function addElem(event) {
 	});
 	console.log(arr);
 	render();
-	localStorage.setItem('to-do-list', JSON.stringify(arr));
+	rewriting();
 	label.value = "";
 }
 
 function delElem(id) {
-	// const innerEvent = ev || event;
-	// innerEvent.target.parentElement.remove();
 	arr = arr.filter(item => item.id !== id);
-	//localStorage.removeItem(id);
-
+	rewriting();
 	console.log(arr);
-	console.log("ouuu");
 	render();
 }
 
 function doneElem(id) {
-	for (let item of arr) {
-		if (arr.id === id && arr.isDone === false) {
-			arr.isDone = true;
-			console.log("было false, стало true");
-		}
-		else if (arr.id === id && arr.isDone === true) {
-			arr.isDone = false;
-			console.log("было true, стало false");
-		}
-	}
-	return arr.isDone;
+	arr[id].isDone = !arr[id].isDone;
+	console.log(arr);
+	// const x = document.getElementsByClassName('elements');
+	// if (arr[id].isDone === true) { x.style.display = 'block'; }
+	// else { x.style.display = 'none'; }
+	
+	render();
+	rewriting();
 }
 
 function render() {
 	const ol = document.getElementById("list");
 	ol.innerHTML = "";
+
+	if (arr.length === 0) {
+		ol.innerHTML = "в планах чилл";
+		return;
+	}
+
 	for (let item of arr) {
 		let li = document.createElement("li");
-		li.innerHTML = `<input type="checkbox">
-		<button onclick="doneElem('${item.id}')">V</button>
-		<span>${item.text}</span>
-		<button onclick="delElem('${item.id}')">x</button>`;
-		// li.setAttribute("id", "element" + item.id);
+		li.innerHTML = `<button onclick="doneElem('${item.id}')">&#10004;</button>
+		<span class="elements">${item.text}</span>
+		<button onclick="delElem('${item.id}')">&#10006;</button>`;
 		ol.appendChild(li);
 	}
 }
 
-// function checkboxCheck() {
-// 	let checkbox = document.querySelectorAll("input[type=checkbox]");
 
-// 	for (let i = 0; i < checkbox.length; i++) {
-// 		checkbox[i].onchange = function () {
-// 			arr = JSON.parse(localStorage.getItem("to-do-list"));
-// 			arr[i].check = this.checked;
-// 			localStorage.setItem("to-do-list", JSON.stringify(arr));
-// 		}
-// 	}
-// }
-
-
+function rewriting() {
+	localStorage.setItem('to-do-list', JSON.stringify(arr));
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("form").addEventListener("submit", addElem);
 	
-	if (localStorage.getItem("to-do-list") !== undefined) {
+	if (localStorage.getItem("to-do-list")) {
 		arr = JSON.parse(localStorage.getItem("to-do-list"));
 	}
 	console.log(arr);
