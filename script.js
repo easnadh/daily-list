@@ -30,10 +30,6 @@ function delElem(id) {
 function doneElem(id) {
 	arr[id].isDone = !arr[id].isDone;
 	console.log(arr);
-	// const x = document.getElementsByClassName('elements');
-	// if (arr[id].isDone === true) { x.style.display = 'block'; }
-	// else { x.style.display = 'none'; }
-	
 	render();
 	rewriting();
 }
@@ -49,8 +45,9 @@ function render() {
 
 	for (let item of arr) {
 		let li = document.createElement("li");
+		if(item.isDone) { li.classList.add("checked") }
 		li.innerHTML = `<button onclick="doneElem('${item.id}')">&#10004;</button>
-		<span class="elements">${item.text}</span>
+		<span>${item.text}</span>
 		<button onclick="delElem('${item.id}')">&#10006;</button>`;
 		ol.appendChild(li);
 	}
@@ -61,6 +58,36 @@ function rewriting() {
 	localStorage.setItem('to-do-list', JSON.stringify(arr));
 }
 
+
+function filter(id) {
+
+	// const active = arr.filter(item => item.isDone === false);
+	// console.log(active);
+
+	const active = [];
+	for (let i = 0; i < arr.length; i++) {
+		if(arr[id].isDone === false) {
+			active.push(arr[id]);
+		}
+	}
+	render();
+	console.log(active);
+
+	// const btns = document.querySelectorAll(".btnf");
+
+	// document.querySelector("div").addEventListener('click', (event) => {
+	// if (event.target.tagName !== 'li') return false;
+
+	// let filterClass = event.target.dataset['f'];
+	// console.log(filterClass);
+	// });
+
+	// for (const item of arr) {
+
+	// }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("form").addEventListener("submit", addElem);
 	
@@ -69,4 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	console.log(arr);
 	render();
+
+	//document.getElementById("active").addEventListener("submit", filter);
 });
