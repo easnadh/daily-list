@@ -25,9 +25,9 @@
 				</li> -->
 		</ol>
 		<div class="filter">
-			<button class='btnf all' data-f="all" id="all">Все</button>
-			<button class='btnf completed' onclick="filter()" data-f="completed" id="completed">Сделано</button>
-			<button class='btnf active' data-f="active" id="active">Не сделано</button>
+			<button class='btnf' onclick="filtering(FILTER_VALUES.all)" id="all">Все</button>
+			<button class='btnf completed' onclick="filtering(FILTER_VALUES.completed)" data-f="completed" id="completed">Сделано</button>
+			<button class='btnf active' data-f="active" onclick="filtering(FILTER_VALUES.active)" id="active">Не сделано</button>
 		</div>
 	</section>
 

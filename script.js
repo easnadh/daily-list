@@ -5,6 +5,14 @@ let arr = [{
 	isDone: false
 }];
 
+const FILTER_VALUES = {
+	all: "ALL",
+	active: "ACTIVE",
+	completed: "COMPLETED"
+}
+
+let filter = FILTER_VALUES.all;
+
 function addElem(event) {
 	event.preventDefault();
 	const label = document.getElementById("label");
@@ -35,6 +43,15 @@ function doneElem(id) {
 }
 
 function render() {
+	let filtered = arr;
+	if (filter === FILTER_VALUES.active) {
+		filtered = arr.filter(item => !item.isDone);
+	}
+	if (filter === FILTER_VALUES.completed) {
+		filtered = arr.filter(item => item.isDone);
+	}
+	console.log(filtered);
+
 	const ol = document.getElementById("list");
 	ol.innerHTML = "";
 
@@ -43,7 +60,7 @@ function render() {
 		return;
 	}
 
-	for (let item of arr) {
+	for (let item of filtered) {
 		let li = document.createElement("li");
 		if(item.isDone) { li.classList.add("checked") }
 		li.innerHTML = `<button onclick="doneElem('${item.id}')">&#10004;</button>
@@ -59,32 +76,35 @@ function rewriting() {
 }
 
 
-function filter(id) {
+function filtering(filterValue) {
 
-	// const active = arr.filter(item => item.isDone === false);
-	// console.log(active);
-
-	const active = [];
-	for (let i = 0; i < arr.length; i++) {
-		if(arr[id].isDone === false) {
-			active.push(arr[id]);
-		}
-	}
+	filter = filterValue;
 	render();
-	console.log(active);
 
-	// const btns = document.querySelectorAll(".btnf");
+// 	const active = arr.filter(item => item.isDone === false);
+// 	console.log(active);
 
-	// document.querySelector("div").addEventListener('click', (event) => {
-	// if (event.target.tagName !== 'li') return false;
+// 	// const active = [];
+// 	// for (let i = 0; i < arr.length; i++) {
+// 	// 	if(arr[id].isDone === false) {
+// 	// 		active.push(arr[id]);
+// 	// 	}
+// 	// }
+// 	render();
+// 	//console.log(active);
 
-	// let filterClass = event.target.dataset['f'];
-	// console.log(filterClass);
-	// });
+// 	// const btns = document.querySelectorAll(".btnf");
 
-	// for (const item of arr) {
+// 	// document.querySelector("div").addEventListener('click', (event) => {
+// 	// if (event.target.tagName !== 'li') return false;
 
-	// }
+// 	// let filterClass = event.target.dataset['f'];
+// 	// console.log(filterClass);
+// 	// });
+
+// 	// for (const item of arr) {
+
+// 	// }
 }
 
 
